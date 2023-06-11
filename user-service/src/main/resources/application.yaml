@@ -1,0 +1,25 @@
+server:
+  port: 8082
+spring:
+  cloud:
+    ssl:
+      enable: false
+  application:
+    name: userservice
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:4306/cloud_user?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: mingaox
+    password: minx527527@
+
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    service-url: # eureka的地址信息
+      defaultZone: http://127.0.0.1:10086/eureka
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    cache-enabled: true

@@ -1,0 +1,39 @@
+server:
+  port: 8085
+
+spring:
+  cloud:
+    gateway:
+      globalcors: # 全局跨域处理
+        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
+        cors-configurations:
+          '[/**]': # /** 代表拦截那些请求
+            allowed-origins:
+              - 'http://localhost:8080'
+              - 'https://www.baidu.com'
+            allowed-methods:
+              - 'GET'
+              - 'POST'
+              - 'PUT'
+            allowed-headers: '*'
+            allowCredentials: true
+            maxAge: 3600
+      routes:
+        - id: user-service
+          uri: lb://userservice
+          predicates:
+            - Path=/user/**
+        - id: order-service
+          uri: lb://orderervice
+          predicates:
+            - Path=/order/**
+      default-filters:
+        - AddRequestHeader=Truth,holle！we'come to happly
+  application:
+    name: gatewayservice
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    service-url: # eureka的地址信息
+      defaultZone: http://127.0.0.1:10086/eureka
