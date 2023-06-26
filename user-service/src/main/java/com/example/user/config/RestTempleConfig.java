@@ -1,7 +1,6 @@
 package com.example.user.config;
 
-import com.netflix.discovery.AbstractDiscoveryClientOptionalArgs;
-import com.netflix.discovery.shared.MonitoredConnectionManager;
+
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
