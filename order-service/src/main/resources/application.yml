@@ -16,6 +16,8 @@ spring:
         max-connections-per-route: 10
     nacos:
       server-addr: localhost:8848
+      discovery:
+        cluster-name: SH
   application:
     name: orderervice
   datasource:

@@ -6,6 +6,8 @@ spring:
       enable: false
     nacos:
       server-addr: localhost:8848
+      discovery:
+        cluster-name: HZ
   application:
     name: userservice
   datasource:
