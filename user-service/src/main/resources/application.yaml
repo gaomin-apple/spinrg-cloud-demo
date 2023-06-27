@@ -14,7 +14,6 @@ spring:
     url: jdbc:mysql://127.0.0.1:4306/cloud_user?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: mingaox
     password: minx527527@
-
   main:
     allow-bean-definition-overriding: true
 mybatis-plus:

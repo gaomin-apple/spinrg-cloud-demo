@@ -33,7 +33,3 @@ spring:
     name: gatewayservice
   main:
     allow-bean-definition-overriding: true
-eureka:
-  client:
-    service-url: # eureka的地址信息
-      defaultZone: http://127.0.0.1:10086/eureka
