@@ -3,7 +3,9 @@ package com.example.user.controller;
 import com.example.user.service.UserService;
 import com.example.usercore.pojo.UserPojo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Calendar;
 
 /**
  * @Auther: min gao
@@ -25,19 +29,22 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/mm")
-    public void mm() {
-        System.out.println("mm");
-    }
     @GetMapping(value = "/v1/login")
     public boolean login(@RequestParam(value = "username") String username,
                       @RequestParam(value = "password") String password) {
 
         UserPojo user = userService.getUser(username);
-        if (null != user) {
-            return true;
-        }
-        return false;
+        return null != user;
+    }
+
+    @Value("${pattern.dateformat}")
+    private String formatStr;
+
+    @GetMapping("/getNowDate")
+    public String getNowDate() {
+        String format = DateFormatUtils.format(Calendar.getInstance().getTime(), formatStr);
+        log.info("当前时间为：{}", format);
+        return format;
     }
 
     @GetMapping( "/getUser")
