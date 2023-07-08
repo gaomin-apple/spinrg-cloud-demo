@@ -15,9 +15,11 @@ spring:
         max-connections: 200
         max-connections-per-route: 10
     nacos:
-      server-addr: localhost:8848
+#      server-addr: localhost:8848
       discovery:
         cluster-name: SH
+        server-addr: localhost:8848
+        namespace: 6a0c5c98-8b81-49f4-942d-4413fe50cee1 # 配置环境（可用于区分dev、test、生产）--环境隔离，不同环境的服务无法调用
   application:
     name: orderervice
   datasource:
@@ -33,3 +35,12 @@ mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   configuration:
     cache-enabled: true
+# 要配置的微服务名称
+#userservice:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule
+
+# application.yml or bootstrap.yml
+#ribbon:
+#  # 设置负载均衡策略为 ZoneAvoidanceRule（优先选择同一区域的节点）
+#  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.ZoneAvoidanceRule

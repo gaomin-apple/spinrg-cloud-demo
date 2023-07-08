@@ -1,13 +1,13 @@
 server:
-  port: 8082
+  port: 8089
 spring:
   cloud:
     ssl:
       enable: false
     nacos:
-      server-addr: localhost:8848
+      server-addr: 127.0.0.1:8848
       discovery:
-        cluster-name: HZ
+        cluster-name: SH
   application:
     name: userservice
   datasource:
