@@ -5,19 +5,25 @@ import com.example.order.controller.result.OrderResult;
 import com.example.order.pojo.OrderPojo;
 import com.example.order.service.OrderService;
 import com.example.usercore.result.UserResult;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Calendar;
+
 /**
  * @Auther: min gao
  * @Date: 2023/5/14 17:11
  * @Description:
  */
+@Slf4j
 @RestController
 @RequestMapping("order")
 public class OrderController {
@@ -30,7 +36,17 @@ public class OrderController {
 
     @Autowired
     private UserClient userClient;
-    
+
+    @Value("${pattern.dateformat}")
+    private String formatStr;
+
+    @GetMapping("/now")
+    public String getNowDate() {
+        String format = DateFormatUtils.format(Calendar.getInstance().getTime(), formatStr);
+        log.info("当前时间为：{}", format);
+        return format;
+    }
+
     @GetMapping("getOrder")
     public OrderResult getOrder(@RequestParam("orderNo") String orderNo) {
         OrderPojo order = orderService.getOrder(orderNo);
