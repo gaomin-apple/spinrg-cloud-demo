@@ -1,5 +1,6 @@
 package com.example.order.controller;
 
+import com.example.order.config.PatternProperties;
 import com.example.feignapi.client.UserClient;
 import com.example.order.controller.result.OrderResult;
 import com.example.order.pojo.OrderPojo;
@@ -9,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,9 +25,12 @@ import java.util.Calendar;
  */
 @Slf4j
 @RestController
-@RefreshScope
+//@RefreshScope
 @RequestMapping("order")
 public class OrderController {
+
+    @Autowired
+    private PatternProperties patternProperties;
 
     @Autowired
     private OrderService orderService;
@@ -39,12 +41,12 @@ public class OrderController {
     @Autowired
     private UserClient userClient;
 
-    @Value("${pattern.dateformat}")
-    private String formatStr;
+//    @Value("${pattern.dateformat}")
+//    private String formatStr;
 
     @GetMapping("/now")
     public String getNowDate() {
-        String format = DateFormatUtils.format(Calendar.getInstance().getTime(), formatStr);
+        String format = DateFormatUtils.format(Calendar.getInstance().getTime(), patternProperties.getDateformat());
         log.info("当前时间为：{}", format);
         return format;
     }
