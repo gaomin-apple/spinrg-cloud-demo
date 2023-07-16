@@ -19,7 +19,7 @@ spring:
         cluster-name: SH
         server-addr: localhost:8848
         namespace: 6a0c5c98-8b81-49f4-942d-4413fe50cee1 # 配置环境（可用于区分dev、test、生产）--环境隔离，不同环境的服务无法调用
-        ephemeral: false #是否临时事例 true是，false非临时事例
+        ephemeral: true #是否临时事例 true是，false非临时事例
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
