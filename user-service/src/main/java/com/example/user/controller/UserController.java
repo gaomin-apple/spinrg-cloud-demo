@@ -1,5 +1,6 @@
 package com.example.user.controller;
 
+import com.example.user.config.PatternProperties;
 import com.example.user.service.UserService;
 import com.example.usercore.pojo.UserPojo;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private PatternProperties patternProperties;
 
     @GetMapping(value = "/v1/login")
     public boolean login(@RequestParam(value = "username") String username,
@@ -37,6 +40,11 @@ public class UserController {
 
         UserPojo user = userService.getUser(username);
         return null != user;
+    }
+
+    @GetMapping(value = "/value")
+    public String value() {
+        return patternProperties.getValue();
     }
 
     @Value("${pattern.dateformat}")
